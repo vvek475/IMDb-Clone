@@ -41,7 +41,7 @@ schema_view = get_schema_view(
 
 
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path,include,re_path
 
 urlpatterns = [
     
@@ -50,7 +50,8 @@ urlpatterns = [
     path('movies/',include('movie.urls')),
     path('watchlist/',include('watchlist.urls')),
     path('auth/',include('jwtAuth.urls')),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
    
 ]
