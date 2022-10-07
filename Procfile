@@ -1,1 +1,1 @@
-web: gunicorn IMDb_clone.wsgi --log-file=-
+waitress-serve --listen=*:8000 IMDb_clone.wsgi:application
