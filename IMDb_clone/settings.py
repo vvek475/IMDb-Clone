@@ -19,13 +19,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+import environ,os
+
+env = environ.Env()
+
+environ.Env.read_env()
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3usv+^s0#+&ap4@ach=n=s^-arx5%^!xnpz_--=fq264=z$8)5'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = eval(env('DEBUG'))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','imdb-clone-production.up.railway.app']
 
 
 # Application definition
@@ -55,6 +63,7 @@ CORS_ALLOWED_ORIGINS=['']
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,7 +114,7 @@ PRODUCTION_DB={
     }
 }
 
-DATABASES = LOCAL_DB if DEBUG else PRODUCTION_DB
+DATABASES = LOCAL_DB if DEBUG else LOCAL_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -148,7 +157,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-API_KEY='4f131ce27b7e4bfcd74de86ff5191005'
+API_KEY=env('API_KEY')
 
 REST_FRAMEWORK = {
     
