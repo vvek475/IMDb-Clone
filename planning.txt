@@ -1,0 +1,3 @@
+cors
+change databse
+how to add api key in a more secure way in production
