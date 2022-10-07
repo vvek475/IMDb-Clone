@@ -1,0 +1,1 @@
+web: gunicorn IMDb_clone.wsgi --log-file=-
