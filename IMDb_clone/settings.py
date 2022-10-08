@@ -34,9 +34,10 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 USE_X_FORWARDED_HOST = True
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['*','imdb-clone-production.up.railway.app']
+ALLOWED_HOSTS = ['*','imdb-clone.up.railway.app']
 
 
 # Application definition
@@ -109,15 +110,16 @@ LOCAL_DB={
 PRODUCTION_DB={
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'LhopYC3oovDQYPsb56QY',
-        'HOST': 'containers-us-west-75.railway.app',
-        'PORT': '6756',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_NAME'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': '',
     }
 }
 
-DATABASES = LOCAL_DB if DEBUG else LOCAL_DB
+
+DATABASES = PRODUCTION_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -182,3 +184,5 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     
 }
+
+SWAGGER_URL=env('SWAGGER_URL')
