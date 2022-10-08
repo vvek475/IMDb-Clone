@@ -33,7 +33,7 @@ schema_view = get_schema_view(
       license=openapi.License(name="BSD License"),
       schemes=['https','http']
    ),
-   url='https://imdb-clone-production.up.railway.app/swagger/',
+   url='https://127.0.0.1:8000/swagger/',
 
    public=True,
    permission_classes=[permissions.AllowAny],
