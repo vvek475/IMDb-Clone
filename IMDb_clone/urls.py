@@ -26,7 +26,7 @@ schema_view = get_schema_view(
     
    openapi.Info(
        
-      title="Open Db API",
+      title="IMDb Backend",
       default_version='v1',
       description="This is a REST API Service that creates watchlist and reviews and ratings",
       terms_of_service="https://www.google.com/policies/terms/",
